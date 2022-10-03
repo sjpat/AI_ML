@@ -1,0 +1,27 @@
+Scoring guide (Rubric) - AllLife Bank Customer Segmentation Criteria
+Define the problem and perform an Exploratory Data Analysis
+- Problem definition, questions to be answered - Data background and contents - Univariate analysis - Bivariate analysis - Insights based on EDA
+
+Data preprocessing
+Prepare the data for analysis - Feature engineering - Missing value treatment - Outlier treatment - Duplicate observations check
+
+Applying K-means Clustering
+- Apply K-means Clustering - Plot the Elbow curve - Check Silhouette Scores - Figure out appropriate number of clusters - Cluster Profiling
+
+Applying Hierarchical Clustering
+- Apply Hierarchical clustering with different linkage methods - Plot dendrograms for each linkage method - Check cophenetic correlation for each linkage method - Figure out appropriate number of clusters - Cluster Profiling
+
+K-means vs Hierarchical Clustering
+Compare clusters obtained from K-means and Hierarchical clustering techniques
+
+Actionable Insights & Recommendations
+Conclude with the key takeaways for the business - What would be your recommendations to the business?
+
+Notebook - Overall Quality
+- Structure and flow - Well commented code
+
+
+
+Feature Engineering Notes: 
+- Drop SI_No, Customer Key, 
+- Outliers exist for avg annual income and total visit online but don't want to treat these. Income information seems appropriate
