@@ -4,16 +4,25 @@ import numpy as np
 import time
 
 class poseDetector():
-    def __init__(self, mode=False, upBody=False, smooth=True, detectionCon=0.5, trackCon=0.5):
-        self.mode = mode
-        self.upBody = False
-        self.smooth = True
-        self.detectionCon = 0.5
-        self.trackCon = 0.5
+    def __init__(self, static_image_mode = False, 
+                       model_complexity = 1,
+                       smooth_landmarks = True,
+                       min_detection_confidence = 0.5,
+                       min_tracking_confidence = 0.5):
+        self.mode = static_image_mode
+        self.complexity = model_complexity
+        self.smooth = smooth_landmarks
+        self.detectionCon = min_tracking_confidence
+        self.trackCon = min_tracking_confidence
         
         self.mpDraw = mp.solutions.drawing_utils
         self.mpPose = mp.solutions.pose
-        self.pose = self.mpPose.Pose(self.mode,self.upBody,self.smooth,self.detectionCon,self.trackCon)
+        self.pose = self.mpPose.Pose(
+            static_image_mode = self.mode,
+            model_complexity=self.complexity,
+            smooth_landmarks=self.smooth,
+            min_detection_confidence=self.detectionCon,
+            min_tracking_confidence=self.trackCon)
         
     def findPose(self, img, draw=True):
         imgRGB = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
@@ -22,7 +31,6 @@ class poseDetector():
         if self.results.pose_landmarks:
             if draw:
                 self.mpDraw.draw_landmarks(img, self.results.pose_landmarks,self.mpPose.POSE_CONNECTIONS)
-                
         return img
     
     def findPosition(self, img, draw=True):
@@ -146,7 +154,7 @@ def draw_dotted_line(frame, lm_coord, start, end, line_color):
         cv2.circle(frame, (lm_coord[0],i+pix_step),2,line_color,-1, lineType=cv2.LINE_AA)
         
     return frame
-    
+
 def main():
     cap = cv2.VideoCapture('PoseVids/Bicep_curl/biceps curl_20.mp4')
     pTime=0
